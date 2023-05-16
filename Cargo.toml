@@ -2,7 +2,38 @@
 name = "sharedsecretctl"
 version = "0.1.0"
 edition = "2021"
+default-run = "sharedsecretctl"
+
+[profile.release]
+lto = "fat"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[[bin]]
+doc = false
+name = "sharedsecretctl"
+path = "src/main.rs"
+
+[[bin]]
+doc = false
+name = "crdgen"
+path = "src/crdgen.rs"
+
+[lib]
+name = "controller"
+path = "src/lib.rs"
 
 [dependencies]
+kube = { version = "0.82.2", default-features = false, features = ["client", "rustls-tls", "derive", "runtime", "unstable-runtime"] }
+tokio = { version = "1.28.1", features = ["net", "macros", "parking_lot", "rt-multi-thread", "signal", "tracing", "time"] }
+tracing = { version = "0.1.37", features = ["async-await", "release_max_level_info"] }
+tracing-subscriber = { version = "0.3.17", features = ["parking_lot", "time", "json", "smallvec", "env-filter"] }
+k8s-openapi = { version = "0.18.0", features = ["v1_25"], default-features = false }
+serde = { version = "1.0.163", features = ["derive"] }
+schemars = { version = "0.8.12", features = ["chrono"] }
+serde_json = "1.0.96"
+serde_yaml = "0.9.21"
+chrono = { version = "0.4.24", features = ["serde"] }
+anyhow = "1.0.71"
+thiserror = "1.0.40"
+futures = "0.3.28"
+tokio-stream = { version = "0.1.14", features = ["net", "signal", "tokio-util"] }

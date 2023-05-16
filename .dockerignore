@@ -1,0 +1,8 @@
+/target
+.idea
+.git
+Tiltfile
+*.md
+.justfile
+tooling-crd.yml
+test-deploy
