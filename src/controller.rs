@@ -95,7 +95,7 @@ pub async fn run(state: State) {
             })
             .owns(secrets, Config::default().any_semantic())
             .run(reconcile_shared_secret_request, shared_secret_request_error_policy, context.clone())
-    }        .map(|_| ()));
+    }.map(|_| ()));
 
     futures::StreamExt::for_each(
         shared_secret_controller.merge(shared_secret_request_controller),
